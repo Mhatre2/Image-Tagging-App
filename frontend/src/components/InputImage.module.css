@@ -1,0 +1,14 @@
+/* src/components/InputImage.module.css */
+
+.imageUrlInput {
+    margin-bottom: 1rem;
+  }
+  
+  .uploadInput {
+    margin: 1rem ;
+  }
+  
+  .searchInput {
+    margin-bottom: 1rem;
+  }
+  
