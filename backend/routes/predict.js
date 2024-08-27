@@ -112,22 +112,23 @@ router.post('/upload', upload.single('file'), async (req, res) => {
 router.post('/save', async (req, res) => {
     try {
         const { imageUrl, labels } = req.body;
+
         if (!imageUrl || !labels) {
-            throw new Error('Image URL and labels are required');
+            console.error('Missing imageUrl or labels', { imageUrl, labels });
+            return res.status(400).send({ error: 'Image URL and labels are required' });
         }
 
-        const newImage = new ImageModel({
-            imageUrl,
-            labels
-        });
-
+        console.log('Received data:', { imageUrl, labels });
+        const newImage = new ImageModel({ imageUrl, labels });
         await newImage.save();
+        console.log('Image saved successfully');
         res.send({ message: "Image and labels saved successfully!" });
     } catch (error) {
-        console.error('Error in /save route:', error);
-        res.status(400).send({ error: error.message });
+        console.error('Error occurred in /save route:', error);
+        res.status(500).send({ error: 'Internal Server Error', details: error.message });
     }
 });
+
 
 router.get('/search', async (req, res) => {
     try {

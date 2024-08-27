@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+
 const Output = ({ outputs = [], imageToPredict, setOutputs, searchResults = [], setSearchResults }) => {
   const [newLabel, setNewLabel] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
