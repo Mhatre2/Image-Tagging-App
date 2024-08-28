@@ -4,21 +4,13 @@ const path = require('path');
 const { ClarifaiStub, grpc } = require("clarifai-nodejs-grpc");
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-
 dotenv.config();
-
 const router = express.Router();
 
 const stub = ClarifaiStub.grpc();
 const metadata = new grpc.Metadata();
 metadata.set("authorization", `Key ${process.env.CLARIFAI_KEY}`);
 
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('MongoDB connected successfully'))
-    .catch(err => {
-        console.error('MongoDB connection error:', err);
-        process.exit(1);
-    });
 
 const ImageModel = require('../models/Image'); 
 
@@ -69,21 +61,6 @@ function predictImage(inputs) {
     });
 }
 
-router.post('/', async (req, res) => {
-    try {
-        const { imageUrl } = req.body;
-        if (!imageUrl) {
-            throw new Error('Image URL is required');
-        }
-
-        const inputs = [{ data: { image: { url: imageUrl } } }];
-        const results = await predictImage(inputs);
-        res.send({ results });
-    } catch (error) {
-        console.error('Error in / route:', error);
-        res.status(400).send({ error: error.message });
-    }
-});
 
 router.post('/upload', upload.single('file'), async (req, res) => {
     try {
@@ -126,22 +103,6 @@ router.post('/save', async (req, res) => {
     } catch (error) {
         console.error('Error occurred in /save route:', error);
         res.status(500).send({ error: 'Internal Server Error', details: error.message });
-    }
-});
-
-
-router.get('/search', async (req, res) => {
-    try {
-        const { label } = req.query;
-        if (!label) {
-            throw new Error('Label query parameter is required');
-        }
-
-        const images = await ImageModel.find({ labels: label });
-        res.send(images);
-    } catch (error) {
-        console.error('Error in /search route:', error);
-        res.status(400).send({ error: error.message });
     }
 });
 
