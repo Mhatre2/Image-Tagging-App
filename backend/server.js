@@ -19,9 +19,7 @@ mongoose.connect(mongoUri, {})
   });
 
 const allowedOrigins = [
-  'http://localhost:5173', 
-  'https://image-tagging-app.vercel.app',
-  'https://image-tagging-8w32kofcl-mhatre2s-projects.vercel.app',
+  'http://localhost:5173',
 ];
 
 app.use(cors({
