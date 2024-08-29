@@ -6,7 +6,7 @@ const Output = ({ outputs = [], imageToPredict, setOutputs, searchResults = [], 
   const [newLabel, setNewLabel] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const apiBaseUrl = "http://localhost:8080";
+  const apiBaseUrl = "https://image-tagging-backend-app.onrender.com";
 
   const handleDelete = (index) => {
     const updatedOutputs = outputs.filter((_, i) => i !== index);
