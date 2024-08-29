@@ -8,7 +8,7 @@ const App = () => {
   const [imageToPredict, setImageToPredict] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  const apiBaseUrl = 'http://localhost:8080/predict'; 
+  const apiBaseUrl = 'https://image-tagging-backend-app.onrender.com/predict'; 
 
   return (
     <div className="flex flex-col h-screen">
