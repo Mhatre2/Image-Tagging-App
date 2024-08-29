@@ -19,7 +19,7 @@ mongoose.connect(mongoUri, {})
   });
 
 const allowedOrigins = [
-  'http://localhost:5173',
+  'https://image-tagging-frontend-app.onrender.com',
 ];
 
 app.use(cors({
