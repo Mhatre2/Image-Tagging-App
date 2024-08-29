@@ -4,7 +4,7 @@ import axios from "axios";
 const InputImage = ({ setOutputs, setImageToPredict }) => {
   const [fileObj, setFileObj] = useState(null);
 
-  const apiBaseUrl = "http://localhost:8080"; 
+  const apiBaseUrl = "https://image-tagging-backend-app.onrender.com"; 
 
   const predictImageViaUpload = () => {
     if (!fileObj) {
